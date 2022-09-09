@@ -1,0 +1,22 @@
+﻿<Window x:Class="LeanderAudioConverter.View.FoldersViewer.FoldersView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LeanderAudioConverter.View.FoldersViewer"
+        mc:Ignorable="d"
+        Title="FoldersView" Height="576" Width="1024" WindowStartupLocation="CenterOwner" MinWidth="1024" MinHeight="576">
+    <Grid>
+        <ListView x:Name="ListViewPath" Height="460.04" VerticalAlignment="Top">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Path" Width="810" DisplayMemberBinding="{Binding Path}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Height="100" VerticalAlignment="Bottom">
+            <Button x:Name="ButtonChangeSelectedEntry" Content="ChangeSelectedEntry" Height="20" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,25" Click="ButtonChangeSelectedEntry_Click" />
+        </Grid>
+    </Grid>
+</Window>

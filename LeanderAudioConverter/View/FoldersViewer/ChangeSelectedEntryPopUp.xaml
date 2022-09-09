@@ -1,0 +1,15 @@
+﻿<Window x:Class="LeanderAudioConverter.View.FoldersViewer.ChangeSelectedEntryPopUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LeanderAudioConverter.View.FoldersViewer"
+        mc:Ignorable="d"
+        Title="ChangeSelectedEntryPopUp" Height="225" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid VerticalAlignment="Stretch" Margin="0,0,0,0">
+        <Label Content="Please enter the new Path:" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxNewPath" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="NoWrap" VerticalAlignment="Center" Width="275"/>
+        <Button x:Name="ButtonChangeSelectedEntry" Content="ChangeSelectedEntry" HorizontalAlignment="Center" Margin="0,0,0,35" VerticalAlignment="Bottom" Click="ButtonChangeSelectedEntry_Click"/>
+
+    </Grid>
+</Window>

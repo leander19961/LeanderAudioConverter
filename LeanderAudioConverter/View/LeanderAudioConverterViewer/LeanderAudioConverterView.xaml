@@ -1,0 +1,54 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LeanderAudioConverter.View.LeanderAudioConverterViewer"
+        xmlns:Model="clr-namespace:LeanderAudioConverter.Model" x:Class="LeanderAudioConverter.View.LeanderAudioConverterViewer.LeanderAudioConverterView"
+        mc:Ignorable="d"
+        Title="LeanderAudioConverterView" Height="720" Width="1280" WindowStartupLocation="CenterScreen" MinWidth="1280" MinHeight="720" Closing="Application_Closing">
+    <Grid>
+        <TabControl Height="554.04" VerticalAlignment="Top">
+            <TabItem Header="InputFiles">
+                <ListView x:Name="ListViewInput" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Path" Width="1065" DisplayMemberBinding="{Binding Path}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Header="OutputFiles">
+                <ListView x:Name="ListViewOutput" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Path" Width="1065" DisplayMemberBinding="{Binding Path}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
+        <Grid Height="150" VerticalAlignment="Bottom">
+            <Button x:Name="ButtonOpenFoldersView" Content="OpenFoldersView" Height="20" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,63" Click="ButtonOpenFoldersView_Click" />
+            <Button x:Name="ButtonCreateOutputFiles" Content="CreateOutputFiles" Height="20" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,44" Click="ButtonCreateOutputFiles_Click" />
+            <Button x:Name="ButtonGetInputFiles" Content="GetInputFiles" Height="20" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,25" Click="ButtonGetInputFiles_Click" />
+
+            <Button x:Name="ButtonStartConverting" Content="StartConverting" Height="20" Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" Click="ButtonStartConverting_Click" />
+            <ProgressBar x:Name="ProgressBarTaskWork" HorizontalAlignment="Center" Height="20" Margin="0,0,0,25" VerticalAlignment="Bottom" Width="250"/>
+            <ComboBox x:Name="ComboBoxInputFormat" HorizontalAlignment="Left" Margin="25,0,0,50" VerticalAlignment="Bottom" Width="80" SelectedIndex="0" SelectionChanged="ComboBoxInputFormat_SelectionChanged">
+                <Model:FileFormat FileFormatString="mp3"/>
+                <Model:FileFormat FileFormatString="flac"/>
+                <Model:FileFormat FileFormatString="wav"/>
+            </ComboBox>
+            <ComboBox x:Name="ComboBoxOutputFormat" HorizontalAlignment="Left" Margin="130,0,0,50" VerticalAlignment="Bottom" Width="80" SelectedIndex="0" SelectionChanged="ComboBoxOutputFormat_SelectionChanged">
+                <Model:FileFormat FileFormatString="mp3"/>
+                <Model:FileFormat FileFormatString="flac"/>
+                <Model:FileFormat FileFormatString="wav"/>
+            </ComboBox>
+            <Label Content="InputFormat" HorizontalAlignment="Left" Margin="27.5,0,0,75" VerticalAlignment="Bottom"/>
+            <Label Content="OutputFormat" HorizontalAlignment="Left" Margin="127.5,0,0,75" VerticalAlignment="Bottom"/>
+        </Grid>
+    </Grid>
+</Window>
