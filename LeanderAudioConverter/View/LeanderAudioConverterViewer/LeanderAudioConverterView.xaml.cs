@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,8 +37,9 @@ namespace LeanderAudioConverter.View.LeanderAudioConverterViewer
 
             string inputFormat = (ComboBoxInputFormat.SelectedItem as FileFormat).FileFormatString;
             string outputFormat = (ComboBoxOutputFormat.SelectedItem as FileFormat).FileFormatString;
+            int maxTasks = int.Parse(TextBoxMaxTasks.Text);
 
-            modelService = new ModelService(this, Settings.Default.inputPath, Settings.Default.outputPath, Settings.Default.ffmpegPath, inputFormat, outputFormat);
+            modelService = new ModelService(this, Settings.Default.inputPath, Settings.Default.outputPath, Settings.Default.ffmpegPath, inputFormat, outputFormat, maxTasks);
         }
 
         private void ButtonGetInputFiles_Click(object sender, RoutedEventArgs e)
@@ -76,7 +78,7 @@ namespace LeanderAudioConverter.View.LeanderAudioConverterViewer
         private void ButtonStartConverting_Click(object sender, RoutedEventArgs e)
         {
             ProgressBarTaskWork.IsIndeterminate = true;
-            StartConverting(modelService.GetOutputFiles(), modelService.FFmpegPath.Path, modelService);
+            StartConverting(modelService.GetOutputFiles(), modelService.FFmpegPath.Path, modelService, modelService.TaskCounter);
         }
 
         public void AllTasksFinished()

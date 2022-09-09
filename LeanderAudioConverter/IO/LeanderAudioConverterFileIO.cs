@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using LeanderAudioConverter.Model;
 
@@ -26,7 +27,7 @@ namespace LeanderAudioConverter.IO
             return inputFiles;
         }
 
-        internal static void StartConverting(List<OutputFile> outputFiles, string ffmpegPath, ModelService modelService)
+        internal static void StartConverting(List<OutputFile> outputFiles, string ffmpegPath, ModelService modelService, Semaphore taskCounter)
         {
             List<Task> tasks = new List<Task>();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using LeanderAudioConverter.View.LeanderAudioConverterViewer;
@@ -13,6 +14,8 @@ namespace LeanderAudioConverter.Model
     {
         private LeanderAudioConverterView mainWindow;
 
+        private Semaphore taskCounter;
+
         private List<InputFile> inputFiles;
         private List<OutputFile> outputFiles;
 
@@ -22,6 +25,11 @@ namespace LeanderAudioConverter.Model
 
         private string inputFormat;
         private string outputFormat;
+
+        public Semaphore TaskCounter
+        {
+            get { return taskCounter; }
+        }
 
         public LeanderAudioConverterPath InputPath
         {
@@ -47,9 +55,11 @@ namespace LeanderAudioConverter.Model
             get { return outputFormat; }
         }
 
-        public ModelService(LeanderAudioConverterView mainWindow, string inputPath, string outputPath, string ffmpegPath, string inputFormat, string outputFormat)
+        public ModelService(LeanderAudioConverterView mainWindow, string inputPath, string outputPath, string ffmpegPath, string inputFormat, string outputFormat, int maxTasks)
         {
             this.mainWindow = mainWindow;
+
+            this.taskCounter = new Semaphore(maxTasks, maxTasks);
 
             this.inputPath = new LeanderAudioConverterPath("inputPath", inputPath);
             this.outputPath = new LeanderAudioConverterPath("outputPath", outputPath);
