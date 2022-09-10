@@ -72,6 +72,11 @@ namespace LeanderAudioConverter.Model
             outputFiles = new List<OutputFile>();
         }
 
+        public void SetTaskCounter(int count)
+        {
+            taskCounter = new Semaphore(count, count);
+        }
+
         public void ChangePath(LeanderAudioConverterPath leanderAudioConverterPath, string newPath)
         {
             leanderAudioConverterPath.Path = newPath.Replace("\"", "");

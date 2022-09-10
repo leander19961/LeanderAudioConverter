@@ -34,6 +34,7 @@ namespace LeanderAudioConverter.View.LeanderAudioConverterViewer
 
             ComboBoxInputFormat.SelectedIndex = Settings.Default.inputFormatIndex;
             ComboBoxOutputFormat.SelectedIndex = Settings.Default.outputFormatIndex;
+            TextBoxMaxTasks.Text = Settings.Default.maxTasks.ToString();
 
             string inputFormat = (ComboBoxInputFormat.SelectedItem as FileFormat).FileFormatString;
             string outputFormat = (ComboBoxOutputFormat.SelectedItem as FileFormat).FileFormatString;
@@ -77,6 +78,11 @@ namespace LeanderAudioConverter.View.LeanderAudioConverterViewer
 
         private void ButtonStartConverting_Click(object sender, RoutedEventArgs e)
         {
+            if (modelService.GetInputFiles().Count == 0 || modelService.GetOutputFiles().Count == 0)
+            {
+                return;
+            }
+
             ProgressBarTaskWork.IsIndeterminate = true;
             StartConverting(modelService.GetOutputFiles(), modelService.FFmpegPath.Path, modelService, modelService.TaskCounter);
         }
@@ -84,17 +90,6 @@ namespace LeanderAudioConverter.View.LeanderAudioConverterViewer
         public void AllTasksFinished()
         {
             ProgressBarTaskWork.IsIndeterminate = false;
-        }
-
-        private void Application_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Dictionary<string, string> settings = new Dictionary<string, string>();
-            settings["inputPath"] = modelService.InputPath.Path;
-            settings["outputPath"] = modelService.OutputPath.Path;
-            settings["ffmpegPath"] = modelService.FFmpegPath.Path;
-            settings["inputFormatIndex"] = ComboBoxInputFormat.SelectedIndex.ToString();
-            settings["outputFormatIndex"] = ComboBoxOutputFormat.SelectedIndex.ToString();
-            SettingsIO.SaveSettings(settings);
         }
 
         private void ComboBoxInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -111,6 +106,32 @@ namespace LeanderAudioConverter.View.LeanderAudioConverterViewer
             {
                 modelService.OutputFormat = (ComboBoxOutputFormat.SelectedItem as FileFormat).FileFormatString;
             }
+        }
+
+        private void TextBoxMaxTasks_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int tmp;
+            if (int.TryParse(TextBoxMaxTasks.Text + e.Text, out tmp) && (0 < tmp && tmp < 100))
+            {
+                e.Handled = false;
+                modelService.SetTaskCounter(tmp);
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Application_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Dictionary<string, string> settings = new Dictionary<string, string>();
+            settings["inputPath"] = modelService.InputPath.Path;
+            settings["outputPath"] = modelService.OutputPath.Path;
+            settings["ffmpegPath"] = modelService.FFmpegPath.Path;
+            settings["inputFormatIndex"] = ComboBoxInputFormat.SelectedIndex.ToString();
+            settings["outputFormatIndex"] = ComboBoxOutputFormat.SelectedIndex.ToString();
+            settings["maxTasks"] = TextBoxMaxTasks.Text;
+            SettingsIO.SaveSettings(settings);
         }
     }
 }

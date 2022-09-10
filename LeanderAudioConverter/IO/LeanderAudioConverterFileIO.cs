@@ -35,7 +35,16 @@ namespace LeanderAudioConverter.IO
             {
                 Task task = Task.Factory.StartNew(() =>
                 {
-                    Process ffmpegProcess = Process.Start(ffmpegPath, $"-i \"{Path.GetFullPath(outputfile.GetInputFile().Path)}\" -y \"{Path.GetFullPath(outputfile.Path)}\"");
+                    modelService.TaskCounter.WaitOne();
+
+                    ProcessStartInfo ffmpegProcessStartInfo = new ProcessStartInfo(ffmpegPath, $"-i \"{Path.GetFullPath(outputfile.GetInputFile().Path)}\" -y \"{Path.GetFullPath(outputfile.Path)}\"")
+                    {
+                        CreateNoWindow = true,
+                    };
+
+                    Process ffmpegProcess = new Process();
+                    ffmpegProcess.StartInfo = ffmpegProcessStartInfo;
+                    ffmpegProcess.Start();
                     ffmpegProcess.WaitForExit();
                 });
 
@@ -46,6 +55,8 @@ namespace LeanderAudioConverter.IO
 
         internal static void TaskFinished(ModelService modelService, List<Task> tasks)
         {
+            modelService.TaskCounter.Release();
+
             bool allTasksFinished = true;
             foreach (Task task in tasks)
             {

@@ -82,5 +82,17 @@ namespace LeanderAudioConverter.Properties {
                 this["outputFormatIndex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int maxTasks {
+            get {
+                return ((int)(this["maxTasks"]));
+            }
+            set {
+                this["maxTasks"] = value;
+            }
+        }
     }
 }

@@ -49,8 +49,8 @@
             </ComboBox>
             <Label Content="InputFormat" HorizontalAlignment="Left" Margin="27.5,0,0,75" VerticalAlignment="Bottom"/>
             <Label Content="OutputFormat" HorizontalAlignment="Left" Margin="127.5,0,0,75" VerticalAlignment="Bottom"/>
-            <Label Content="MaxTasks" HorizontalAlignment="Left" Margin="295,0,0,75" VerticalAlignment="Bottom" IsEnabled="False"/>
-            <TextBox x:Name="TextBoxMaxTasks" HorizontalAlignment="Left" Margin="304,0,0,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="40" MaxLines="1" MaxLength="2" Text="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
+            <Label Content="MaxTasks" HorizontalAlignment="Left" Margin="295,0,0,75" VerticalAlignment="Bottom" IsEnabled="True"/>
+            <TextBox x:Name="TextBoxMaxTasks" HorizontalAlignment="Left" Margin="304,0,0,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="40" MaxLines="1" Text="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="True" PreviewTextInput="TextBoxMaxTasks_PreviewTextInput"/>
         </Grid>
     </Grid>
 </Window>

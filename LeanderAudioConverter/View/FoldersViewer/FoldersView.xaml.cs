@@ -44,17 +44,20 @@ namespace LeanderAudioConverter.View.FoldersViewer
                 return;
             }
 
-            if (popUp.NewPath != null)
-            {
-                popUp.NewPath.Replace("\"", "");
-            }
-
-            if (!Directory.Exists(popUp.NewPath) && !File.Exists(popUp.NewPath))
+            if (popUp.NewPath == null || popUp.NewPath == String.Empty)
             {
                 return;
             }
 
-            modelService.ChangePath(ListViewPath.SelectedItem as LeanderAudioConverterPath, popUp.NewPath);
+            string newPath = popUp.NewPath;
+            newPath = newPath.Replace("\"", String.Empty);
+
+            if (!Directory.Exists(newPath) && !File.Exists(newPath))
+            {
+                return;
+            }
+
+            modelService.ChangePath(ListViewPath.SelectedItem as LeanderAudioConverterPath, newPath);
             ListViewPath.Items.Refresh();
         }
     }

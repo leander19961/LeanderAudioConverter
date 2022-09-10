@@ -21,11 +21,13 @@ namespace LeanderAudioConverter.Resource
             {
                 defaultSettings.inputFormatIndex = int.Parse(settings["inputFormatIndex"]);
                 defaultSettings.outputFormatIndex = int.Parse(settings["outputFormatIndex"]);
+                defaultSettings.maxTasks = int.Parse(settings["maxTasks"]);
             }
             catch
             {
                 defaultSettings.inputFormatIndex = 0;
                 defaultSettings.outputFormatIndex = 0;
+                defaultSettings.maxTasks = 4;
             }
 
             defaultSettings.Save();
